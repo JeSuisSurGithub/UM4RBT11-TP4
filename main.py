@@ -21,25 +21,40 @@ arb.affichage_polonais()
 print(arb.evaluer(variable))
 # arb.tracer("y", [i / 100 for i in range(1, 5000, 1)])
 
-# (((0 / (x * 0 + 1 * x)) / 1) - 0) + exp(0)
+# (((0 / (x * 0 + 1 * x) / 1) - 0) + exp(0)
 arb2 = noeud.Noeud("+") \
-    .ajouter_enfant(noeud.Noeud("exp")
-        .ajouter_enfant(noeud.Noeud("0"))) \
-    .ajouter_enfant(noeud.Noeud("-")
-        .ajouter_enfant(noeud.Noeud("/")
-            .ajouter_enfant(noeud.Noeud("/"))
-                .ajouter_enfant(noeud.Noeud("0"))
-                .ajouter_enfant(noeud.Noeud("/")
-                    .ajouter_enfant(noeud.Noeud("+")
-                        .ajouter_enfant(noeud.Noeud("*")
-                            .ajouter_enfant(noeud.Noeud("x"))
-                            .ajouter_enfant(noeud.Noeud("0")))
-                        .ajouter_enfant(noeud.Noeud("*")
-                            .ajouter_enfant(noeud.Noeud("1"))
-                            .ajouter_enfant(noeud.Noeud("x")))))
-            .ajouter_enfant(noeud.Noeud("1")))
-        .ajouter_enfant(noeud.Noeud("0")))
+    .ajouter_enfant(
+        noeud.Noeud("exp")
+            .ajouter_enfant(
+            noeud.Noeud("0")
+        )
+    ) \
+    .ajouter_enfant(
+        noeud.Noeud("-")
+        .ajouter_enfant(
+            noeud.Noeud("/")
+            .ajouter_enfant(noeud.Noeud("0"))
+            .ajouter_enfant(
+                noeud.Noeud("/")
+                .ajouter_enfant(
+                    noeud.Noeud("+")
+                    .ajouter_enfant(
+                        noeud.Noeud("*")
+                        .ajouter_enfant(noeud.Noeud("x"))
+                        .ajouter_enfant(noeud.Noeud("0"))
+                    )
+                    .ajouter_enfant(
+                        noeud.Noeud("*")
+                        .ajouter_enfant(noeud.Noeud("1"))
+                        .ajouter_enfant(noeud.Noeud("x"))
+                    )
+                )
+                .ajouter_enfant(noeud.Noeud("1"))
+            )
+        )
+        .ajouter_enfant(noeud.Noeud("0"))
+    )
 arb2.affichage_polonais()
 print("")
-arb2.simplifiee()
+arb2 = arb2.simplifiee()
 arb2.affichage_polonais()
